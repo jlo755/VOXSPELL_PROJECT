@@ -1,0 +1,12 @@
+%Fruit
+Dog
+Orange
+Apple
+%Animals
+Cat
+Fish
+Lion
+%Vegetables
+Carrot
+Broccoli
+Brussel Sprout

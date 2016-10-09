@@ -14,9 +14,15 @@ public class SettingsModel {
 	private ArrayList<String> themes = new ArrayList<String>();
 
 	public SettingsModel(){
+		makeRequiredSettingsFile();
 		levels = new FileHandler().generateLevels();
-		System.out.println(levels);
+		generateVoices();
+		addThemes();
+		fileName = new FileHandler().getSetting("File:", ".settings.ini");
 
+	}
+
+	public void generateVoices(){
 		String bashCmd = "ls /usr/share/festival/voices/english";
 		ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", bashCmd);
 		Process process;
@@ -34,12 +40,8 @@ public class SettingsModel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		makeRequiredSettingsFile();
-		addThemes();
-		fileName = new FileHandler().getSetting("File:", ".settings.ini");
-
 	}
-
+	
 	public ArrayList<String> getLevels() {
 		return levels;
 	}
@@ -68,9 +70,11 @@ public class SettingsModel {
 	public void makeRequiredSettingsFile(){
 		if(!new FileHandler().fileExists(".settings.ini")){
 			new FileHandler().makeFile(".settings.ini");
-			new FileHandler().writeToFile(".settings.ini", "Level: "+levels.get(0));
-			new FileHandler().writeToFile(".settings.ini", "Voice: "+voices.get(0));
 			new FileHandler().writeToFile(".settings.ini", "File: NZCER-spelling-lists.txt");
+			levels = new FileHandler().generateLevels();
+			new FileHandler().writeToFile(".settings.ini", "Level: "+levels.get(0));
+			generateVoices();
+			new FileHandler().writeToFile(".settings.ini", "Voice: "+voices.get(0));
 			new FileHandler().writeToFile(".settings.ini", "Theme: Forest");
 		}
 	}

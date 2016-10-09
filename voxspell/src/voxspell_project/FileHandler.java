@@ -22,7 +22,11 @@ import java.util.List;
  */
 public class FileHandler {
 	String[] _files = {".mastered.txt",".stats.txt",".failed.txt",".faulted.txt"};
-	String spellingList = "NZCER-spelling-lists.txt";
+	String spellingList;
+	
+	public FileHandler(){
+		spellingList = getSetting("File:", ".settings.ini");
+	}
 
 	public void clearFile(String fileName){
 		PrintWriter pw;
@@ -129,7 +133,7 @@ public class FileHandler {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			String word = "";
 			while((word = bufferedReader.readLine()) != null) {
-				if(word.split(" ")[0].equals("%Level")){
+				if(word.substring(0,1).equals("%")){
 					levels.add(word.substring(1));
 				}
 			}
@@ -137,6 +141,7 @@ public class FileHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("Levels: "+levels);
 		return levels;
 
 	}

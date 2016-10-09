@@ -21,7 +21,7 @@ public class VOXSPELL_PROJECT extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-    	new SettingsModel().makeRequiredSettingsFile();
+    	SettingsModel hello = new SettingsModel();
         /*String tim = "file:///home/jacky/NetBeansProjects/VOXSPELL_PROJECT/src/voxspell_project/Ambler.mp3";
         Media hit = new Media(tim);
         MediaPlayer mediaPlayer = new MediaPlayer(hit);
