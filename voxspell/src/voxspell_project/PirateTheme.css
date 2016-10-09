@@ -1,0 +1,22 @@
+.button {
+	-fx-background-radius: 10px;
+}
+
+.root {
+	-fx-background-image: url("background_pirate.png");
+	-fx-background-size: cover;
+}
+
+#imageView {
+	-fx-background-radius: 30;
+	-fx-background-image: url("dog.png");
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#woodButton:hover{
+	-fx-image: url("wood_button_hover.png");
+}
+
+#woodButton{
+	-fx-image: url("wood_button.png");
+}

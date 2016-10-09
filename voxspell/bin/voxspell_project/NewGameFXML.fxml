@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="@mainMenuStyle.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell_project.NewGameController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell_project.NewGameController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -17,16 +17,17 @@
                   <Font name="Sawasdee" size="37.0" />
                </font>
             </TextArea>
-            <TextField layoutX="231.0" layoutY="182.0" />
+            <TextField fx:id="userSpell" layoutX="231.0" layoutY="182.0" onKeyPressed="#textFieldEnterAction" />
             <Button layoutX="474.0" layoutY="15.0" mnemonicParsing="false" text="Statistics" />
             <Button layoutX="564.0" layoutY="14.0" mnemonicParsing="false" text="Settings" />
-            <Button fx:id="back" layoutX="18.0" layoutY="15.0" onAction="#backAction" mnemonicParsing="false" text="Back" />
-            <Button fx:id="relisten" layoutX="281.0" layoutY="234.0" mnemonicParsing="false" text="Relisten" />
-            <Label fx:id="wordLabel" layoutX="212.0" layoutY="111.0" text="Word 1 of 5:">
+            <Button fx:id="back" layoutX="18.0" layoutY="15.0" mnemonicParsing="false" onAction="#backAction" text="Back" />
+            <Button fx:id="submit" layoutX="288.0" layoutY="235.0" mnemonicParsing="false" onAction="#submitAction" text="Submit" />
+            <Label fx:id="wordLabel" alignment="CENTER" layoutX="46.0" layoutY="111.0" prefHeight="59.0" prefWidth="550.0" text="Word 1 of 5:" textAlignment="CENTER">
                <font>
                   <Font name="Sawasdee" size="37.0" />
                </font>
             </Label>
+            <Button fx:id="start" layoutX="296.0" layoutY="182.0" onAction="#startAction" mnemonicParsing="false" text="Start" />
       </children>
     </AnchorPane>
   </children>
