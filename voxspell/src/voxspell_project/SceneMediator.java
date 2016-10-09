@@ -19,7 +19,7 @@ import javafx.stage.Stage;
  * @author jacky
  */
 public class SceneMediator{;
-    String _theme = new FileHandler().getSetting("Theme:");
+    String _theme = new FileHandler().getSetting("Theme:", ".settings.ini");
     
     
     /*public void addScene(String nameOfScene, Scene scene){

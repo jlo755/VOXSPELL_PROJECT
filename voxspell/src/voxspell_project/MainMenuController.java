@@ -32,6 +32,7 @@ public class MainMenuController implements Initializable {
     @FXML private ImageView exitGame;
     @FXML private Button settings;
     @FXML private ImageView imageView;
+    @FXML private Button stats;
     
     @FXML
     private void newGameAction(){
@@ -54,6 +55,21 @@ public class MainMenuController implements Initializable {
     @FXML
     private void usersAction(){
     	
+    }
+    
+    @FXML
+    private void statsAction(ActionEvent event){
+    	Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("StatsScreen.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Statistics");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     @FXML

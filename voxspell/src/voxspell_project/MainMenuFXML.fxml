@@ -13,7 +13,7 @@
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <Button fx:id="settings" layoutX="564.0" layoutY="14.0" mnemonicParsing="false" onAction="#settingsAction" text="Settings" />
-            <Button layoutX="474.0" layoutY="15.0" mnemonicParsing="false" text="Statistics" />
+            <Button fx:id="stats" layoutX="474.0" layoutY="15.0" onAction="#statsAction" mnemonicParsing="false" text="Statistics" />
             <Label layoutX="87.0" layoutY="18.0" text="Master Speller" />
             <ProgressBar layoutX="87.0" layoutY="38.0" prefHeight="18.0" prefWidth="76.0" progress="1.0" />
             <ImageView id="imageView" fx:id="imageView" fitHeight="66.0" fitWidth="63.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false">

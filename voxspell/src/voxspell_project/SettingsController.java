@@ -55,10 +55,10 @@ public class SettingsController implements Initializable {
 	
 	public void setComboBoxes(){
 		FileHandler fileHandler = new FileHandler();
-			voicesCombo.setValue(fileHandler.getSetting("Voice:"));
-			spellingLevelCombo.setValue(fileHandler.getSetting("Level:"));
-			themeCombo.setValue(fileHandler.getSetting("Theme:"));
-			fileField.setText(fileHandler.getSetting("File:"));
+			voicesCombo.setValue(fileHandler.getSetting("Voice:", ".settings.ini"));
+			spellingLevelCombo.setValue(fileHandler.getSetting("Level:", ".settings.ini"));
+			themeCombo.setValue(fileHandler.getSetting("Theme:", ".settings.ini"));
+			fileField.setText(fileHandler.getSetting("File:", ".settings.ini"));
 	}
 	
 	public void uploadFileAction(){

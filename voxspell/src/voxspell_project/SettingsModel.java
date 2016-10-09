@@ -36,7 +36,7 @@ public class SettingsModel {
 		}
 		makeRequiredSettingsFile();
 		addThemes();
-		fileName = new FileHandler().getSetting("File:");
+		fileName = new FileHandler().getSetting("File:", ".settings.ini");
 
 	}
 

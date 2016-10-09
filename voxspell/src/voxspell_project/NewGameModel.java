@@ -49,8 +49,8 @@ public class NewGameModel {
 	}
 
 	public void execute() {
-		_voiceSelected = new FileHandler().getSetting("Voice:");
-		_level = "%"+new FileHandler().getSetting("Level:");
+		_voiceSelected = new FileHandler().getSetting("Voice:", ".settings.ini");
+		_level = "%"+new FileHandler().getSetting("Level:", ".settings.ini");
 		this._wordsCorrect = 0;
 		this._iterations = 0;
 		this._words.clear();
@@ -60,7 +60,7 @@ public class NewGameModel {
 		 * This is signature method from the Command interface, and the execute method gets called
 		 * Specifically, it is executing the model view so the spellingGUI can begin.
 		 */
-		_fileName = new FileHandler().getSetting("File:");
+		_fileName = new FileHandler().getSetting("File:", ".settings.ini");
 		_words = new FileHandler().getWordList(_fileName, _level);
 		// setting the wordList to the required spelling list
 		if(_words.size() == 0){

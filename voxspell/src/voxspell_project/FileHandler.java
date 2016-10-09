@@ -204,10 +204,10 @@ public class FileHandler {
 		}
 	}
 	
-	public String getSetting(String detail){
+	public String getSetting(String detail, String file){
 		FileReader fileReader;
 		try {
-			fileReader = new FileReader(".settings.ini");
+			fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			String word = "";
 			while((word = bufferedReader.readLine()) != null) {
