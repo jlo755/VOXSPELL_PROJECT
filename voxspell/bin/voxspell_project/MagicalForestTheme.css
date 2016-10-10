@@ -8,7 +8,6 @@
 }
 
 #imageView {
-	-fx-background-radius: 30;
 	-fx-background-image: url("dog.png");
 	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
@@ -19,4 +18,45 @@
 
 #woodButton{
 	-fx-image: url("wood_button.png");
+}
+
+#woodNewButton:hover{
+	-fx-image: url("wood_button_new_hover.png");
+}
+
+#woodNewButton{
+	-fx-image: url("wood_button_new.png");
+}
+
+#woodVisitButton:hover{
+	-fx-image: url("wood_button_visit_hover.png");
+}
+
+#woodVisitButton{
+	-fx-image: url("wood_button_visit.png");
+}
+
+#woodExitButton:hover{
+	-fx-image: url("wood_button_exit_hover.png");
+}
+
+#woodExitButton{
+	-fx-image: url("wood_button_exit.png");
+}
+
+#anchor {
+	-fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+#newGame{
+	-fx-font-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);
 }

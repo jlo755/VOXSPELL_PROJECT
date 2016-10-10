@@ -144,7 +144,8 @@ public class NewGameModel {
 		if(_iterations < NUM_WORDS_TESTED){
 			_controller.setUserSpell("Spell word: "+(getIterations()+1)+" of "+NUM_WORDS_TESTED+"");
 		} else {
-			_controller.setUserSpell("Complete!");
+			_controller.setUserSpell("Complete!\nYou have spelt: "+_wordsCorrect+" words correct!");
+			_controller.endGameDisableButtons();
 			new FileHandler().incrementValue(_user.getUser(), "Coins:", _wordsCorrect*10);
 		}
 		proceedToNextWord(condition);

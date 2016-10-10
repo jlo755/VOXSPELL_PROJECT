@@ -27,6 +27,7 @@ public class VOXSPELL_PROJECT extends Application {
         MediaPlayer mediaPlayer = new MediaPlayer(hit);
         mediaPlayer.play();*/
     	stage.setResizable(false);
+    	stage.setTitle("Main Menu");
         Parent root = FXMLLoader.load(getClass().getResource("MainMenuFXML.fxml"));
         //root.getStylesheets().add(getClass().getResource("mainMenuStyle.css").toExternalForm());
         

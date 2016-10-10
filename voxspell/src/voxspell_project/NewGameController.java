@@ -79,4 +79,9 @@ public class NewGameController implements Initializable{
     	wordLabel.setText(label);
     }
     
+    public void endGameDisableButtons(){
+    	userSpell.setVisible(false);
+    	submit.setVisible(false);
+    }
+    
 }

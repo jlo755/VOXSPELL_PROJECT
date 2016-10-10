@@ -7,13 +7,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell_project.MainMenuController">
+<VBox prefHeight="434.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell_project.MainMenuController">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="settings" layoutX="564.0" layoutY="14.0" mnemonicParsing="false" onAction="#settingsAction" text="Settings" />
-            <Button fx:id="stats" layoutX="474.0" layoutY="15.0" onAction="#statsAction" mnemonicParsing="false" text="Statistics" />
+            <Button fx:id="settings" layoutX="608.0" layoutY="13.0" mnemonicParsing="false" onAction="#settingsAction" text="Settings" />
+            <Button fx:id="stats" layoutX="518.0" layoutY="14.0" mnemonicParsing="false" onAction="#statsAction" text="Statistics" />
             <Label layoutX="87.0" layoutY="18.0" text="Master Speller" />
             <ProgressBar layoutX="87.0" layoutY="38.0" prefHeight="18.0" prefWidth="76.0" progress="1.0" />
             <ImageView id="imageView" fx:id="imageView" fitHeight="66.0" fitWidth="63.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" smooth="false">
@@ -21,17 +22,17 @@
                   <Image url="@dog.png" />
                </image>
             </ImageView>
-            <ImageView id="woodButton" fx:id="newGame" fitHeight="66.0" fitWidth="116.0" onMousePressed="#newGameAction" layoutX="263.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="woodNewButton" fx:id="newGame" fitHeight="81.0" fitWidth="155.0" layoutX="270.0" layoutY="170.0" onMousePressed="#newGameAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@wood_button.png" />
                </image>
             </ImageView>
-            <ImageView id="woodButton" fx:id="visitShop" fitHeight="60.0" fitWidth="116.0" layoutX="263.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="woodVisitButton" fx:id="visitShop" fitHeight="81.0" fitWidth="155.0" layoutX="270.0" layoutY="256.0" onMousePressed="#visitShopAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@wood_button.png" />
                </image>
             </ImageView>
-            <ImageView id="woodButton" fx:id="exitGame" fitHeight="60.0" fitWidth="115.0" onMousePressed="#exitGameAction" layoutX="264.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="woodExitButton" fx:id="exitGame" fitHeight="81.0" fitWidth="155.0" layoutX="270.0" layoutY="342.0" onMousePressed="#exitGameAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@wood_button.png" />
                </image>

@@ -42,11 +42,6 @@ public class MainMenuController implements Initializable {
     }
     
     @FXML
-    private void visitShopAction() {
-        //label.setText("Hello World!");
-    }
-    
-    @FXML
     private void exitGameAction(){
        Stage stage = (Stage)newGame.getScene().getWindow();
        stage.close();
@@ -55,6 +50,12 @@ public class MainMenuController implements Initializable {
     @FXML
     private void usersAction(){
     	
+    }
+    
+    @FXML
+    private void visitShopAction(){
+        Stage stage = (Stage)visitShop.getScene().getWindow();
+    	new SceneMediator().changeScene(stage, "ShopFXML.fxml", "Shop");
     }
     
     @FXML
