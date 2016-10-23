@@ -1,0 +1,68 @@
+.button {
+	-fx-background-radius: 10px;
+}
+
+.root {
+	-fx-background-image: url("../../.resources/background_pirate.png");
+	-fx-background-size: cover;
+}
+
+#imageView {
+	-fx-background-radius: 30;
+	-fx-background-image: url("../../.resources/dog.png");
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#woodButton:hover{
+	-fx-image: url("../../.resources/wood_button_hover.png");
+}
+
+#woodButton{
+	-fx-image: url("../../.resources/wood_button.png");
+}
+
+#woodNewButton:hover{
+	-fx-image: url("../../.resources/wood_button_new_hover.png");
+}
+
+#woodNewButton{
+	-fx-image: url("../../.resources/wood_button_new.png");
+}
+
+#woodVisitButton:hover{
+	-fx-image: url("../../.resources/wood_button_visit_hover.png");
+}
+
+#woodVisitButton{
+	-fx-image: url("../../.resources/wood_button_visit.png");
+}
+
+#woodExitButton:hover{
+	-fx-image: url("../../.resources/wood_button_exit_hover.png");
+}
+
+#woodExitButton{
+	-fx-image: url("../../.resources/wood_button_exit.png");
+}
+
+#unlockedButton:hover{
+	-fx-image: url("../../.resources/wood_button_unlocked_hover.png");
+}
+
+#unlockedButton{
+	-fx-image: url("../../.resources/wood_button_unlocked_hover.png");
+}
+
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+#newGame{
+	-fx-font-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);
+}
