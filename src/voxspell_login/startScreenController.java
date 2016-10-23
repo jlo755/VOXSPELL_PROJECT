@@ -13,6 +13,14 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import voxspell_media_handler.SceneMediator;
 
+/**
+ * This class is the controller for the start screen GUI. It handles simple operations such as
+ * switching screens when the create account or login button is pressed. 
+ * 
+ * @author jacky
+ *
+ */
+
 public class startScreenController implements Initializable {
 	@FXML Button login;
 	@FXML Button createUser;

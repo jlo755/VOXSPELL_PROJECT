@@ -30,6 +30,15 @@ import voxspell_media_handler.SceneMediator;
 import voxspell_project.FileHandler;
 import voxspell_project.User;
 
+/**
+ * This class is the controller for the shop class. It handles the purchasing of themes, bgms, and
+ * also videos for the user to play. It evaluates whether these purchases have been made previously, so
+ * cannot be made again.
+ * 
+ * @author jacky
+ *
+ */
+
 public class ShopController implements Initializable  {
 
 	@FXML ScrollPane scroll;
@@ -42,6 +51,10 @@ public class ShopController implements Initializable  {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		/*
+		 * This method is called upon the initialization of the fxml loader. It will
+		 * evaluate all available items and set the corresponding image and action.
+		 */
 		scroll.setHbarPolicy(ScrollBarPolicy.NEVER);
 		scroll.setVbarPolicy(ScrollBarPolicy.NEVER);
 		evaluateAvailableVideos();
@@ -84,35 +97,41 @@ public class ShopController implements Initializable  {
 	}
 
 	@FXML
-	public void video1Action(){
-		new MediaPlayer(".media/big_buck_bunny_1_minute.avi",false).setupGUI();
-	}
-
-	@FXML
-	public void video2Action(){
-		new MediaPlayer(".media/SPOOKY.avi",true).setupGUI();
-	}
-
-	@FXML
 	public void buyVideoAction(MouseEvent e){
 		String video = "";
 		if(e.getSource() == video1){
 			video = "Big Bucks Bunny";
+			confirmPurchase(video1, video);
 		} else if(e.getSource() == video2){
 			video ="Spooky Big Bucks Bunny";
+			confirmPurchase(video2, video);
 		}
+		
+		
+	}
+	
+	public void confirmPurchase(ImageView video1, String video){
+		/*
+		 * This method is to confirm a video purchase, and currently write the
+		 * purchase to the user's file so it is available.
+		 */
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Are you sure?");
 		alert.setHeaderText("Video: "+video+"\nCost: 1000 coins");	
 		alert.setContentText("Are you sure you want to buy it?");
-
 		Optional<ButtonType> result = alert.showAndWait();
+		String name = "";
+		if(video.equals("Big Bucks Bunny")){
+			name = "video1";
+		} else {
+			name = "video2";
+		}
 		if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
 			if(confirmPurchase(1000)){
 				new FileHandler().incrementValue(User.getInstance().getUserSettings(), "Coins:", -1000);
-				new FileHandler().addPurchase(User.getInstance().getUserSettings(), video.replaceAll("\\s+", ""), "Videos:");
-				pirateTheme.setId("unlockedButton");
-				pirateTheme.setDisable(true);
+				new FileHandler().addPurchase(User.getInstance().getUserSettings(), name, "Videos:");
+				video1.setId("unlockedButton");
+				video1.setDisable(true);
 			} else {
 				Alert error = new Alert(AlertType.ERROR);
 				error.setTitle("Error!");

@@ -23,6 +23,9 @@ import voxspell_media_handler.SceneMediator;
 import voxspell_project.MediaListener;
 
 /**
+ * This class is the controller for the main menu GUI. It handles the operations opening the windows 
+ * for new game, gallery, visiting the shop, statistics, and settings, and properly 
+ * allocates the correct BGM.
  *
  * @author jacky
  */
@@ -39,16 +42,12 @@ public class MainMenuController implements Initializable {
     @FXML
     private void newGameAction(){
 	    Stage stage = (Stage) newGame.getScene().getWindow();
-        //new SceneMediator().showScene((Stage)newGame.getScene().getWindow(), "newGame");
 	    new SceneMediator().changeScene(stage, "/voxspell_spelling/NewGameFXML.fxml", "New Game");
 	    new MediaListener().fireGameEvent();
     }
     
     @FXML
     private void exitGameAction(){
-       /*Stage stage = (Stage)newGame.getScene().getWindow();
-       stage.close();
-       System.exit(0);*/
         Stage stage = (Stage)visitShop.getScene().getWindow();
     	new SceneMediator().changeScene(stage, "/voxspell_gallery/galleryFXML.fxml", "Gallery");
     }

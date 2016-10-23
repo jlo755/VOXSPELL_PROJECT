@@ -4,6 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+/**
+ * This class represents the controller for the general purpose dialog popup. It has two
+ * buttons, yes and no, which will return a boolean based on which is clicked.
+ * 
+ * @author jacky
+ *
+ */
+
 
 public class dialogController {
 	@FXML Button yes;

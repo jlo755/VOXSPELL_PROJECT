@@ -15,6 +15,9 @@ import voxspell_project.FileHandler;
 import voxspell_project.User;
 
 /**
+ * This is the model associated with a new game. It handles operations such as
+ * generating random words, correctly processing user input and states, and ending the game
+ * when the iteration is complete.
  *
  * @author jacky
  */
@@ -33,7 +36,7 @@ public class NewGameModel {
 	private String _voiceSelected = "";
 	private int _listSize = 0;
 	private String LIST_FILE_NAME = "NZCER-spelling-lists.txt"; // The constant name of the word list - Victor
-	public static final int NUM_WORDS_TESTED = 3; // A constant of num words to be tested, refactored - Victor
+	public static final int NUM_WORDS_TESTED = 10; // A constant of num words to be tested, refactored - Victor
 	private String stringToCheck = "";
 	private User _user = new User().getInstance();
 
@@ -53,8 +56,8 @@ public class NewGameModel {
 	}
 
 	public void execute() {
-		_voiceSelected = new FileHandler().getSetting("Voice:", ".settings.ini");
-		_level = "%"+new FileHandler().getSetting("Level:", ".settings.ini");
+		_voiceSelected = new FileHandler().getSetting("Voice:", User.getInstance().getUserSettings());
+		_level = "%"+new FileHandler().getSetting("Level:", User.getInstance().getUserSettings());
 		this._wordsCorrect = 0;
 		this._iterations = 0;
 		this._words.clear();
@@ -64,7 +67,7 @@ public class NewGameModel {
 		 * This is signature method from the Command interface, and the execute method gets called
 		 * Specifically, it is executing the model view so the spellingGUI can begin.
 		 */
-		_fileName = new FileHandler().getSetting("File:", ".settings.ini");
+		_fileName = new FileHandler().getSetting("File:", User.getInstance().getUserSettings());
 		_words = new FileHandler().getWordList(_fileName, _level);
 		// setting the wordList to the required spelling list
 		if(_words.size() == 0){
@@ -93,11 +96,6 @@ public class NewGameModel {
 				if(!(_currentWord.toCharArray()[i]+"").equals("'")){
 					stringToCheck=stringToCheck+_currentWord.toCharArray()[i];
 				}
-			}
-			if(_words.size() >= NUM_WORDS_TESTED){
-				return "Spell word "+(_iterations+1)+" of "+NUM_WORDS_TESTED+": "; // Changed to cater for user input display - Victor
-			} else {
-				return "Spell word "+(_iterations+1)+" of "+_words.size()+": "; // Changed to cater for user input display - Victor
 			}
 		}
 		return null;
@@ -152,8 +150,8 @@ public class NewGameModel {
 		 * failed if it does not exist. if review is specified, it will prompt users if they
 		 * want to know how to spell a word if it is failed again
 		 */
-		if(_iterations < NUM_WORDS_TESTED){
-			_controller.setUserSpell("Spell word: "+(getIterations()+1)+" of "+NUM_WORDS_TESTED+"");
+		if(_iterations < _words.size()){
+			_controller.setUserSpell("Spell word: "+(getIterations()+1)+" of "+_words.size()+"");
 		} else {
 			_controller.setUserSpell("Complete!\nYou have spelt: "+_wordsCorrect+" words correct!");
 			_controller.endGameDisableButtons();

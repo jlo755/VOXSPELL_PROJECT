@@ -15,6 +15,14 @@ import javafx.stage.Stage;
 import voxspell_project.FileHandler;
 import voxspell_project.User;
 
+/**
+ * This class is the controller to the Stats GUI. It handles user related input such as notifying
+ * registered models of changes to the combobox, such that it has to update its view.
+ * 
+ * @author jacky
+ *
+ */
+
 public class StatsController implements Initializable {
 
 	@FXML Label userLabel;
@@ -49,6 +57,11 @@ public class StatsController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		/*
+		 * Sets the controller and its view to the correct state so it is consistent
+		 * with what the user sees. Also generate the list, and levels associated
+		 * with the user.
+		 */
 		_model = new StatsModel(this);
 		_model.generateList();
 		_model.generateLevel(""+_model.getSpellingList().get(0));		

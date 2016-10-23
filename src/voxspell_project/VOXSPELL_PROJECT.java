@@ -28,29 +28,13 @@ public class VOXSPELL_PROJECT extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		System.out.println("hi");
 		new FileHandler().makeFile(".users");
-		SettingsModel settings = new SettingsModel();
 		stage.setResizable(false);
 		stage.setTitle("Login Screen");
 		MusicPlayer media = new MusicPlayer();
-		media.getInstance().setFile(new FileHandler().getSetting("BGM:", ".settings.ini"));
-		media.getInstance().execute();
-		Parent root = FXMLLoader.load(getClass().getResource("/voxspell_login/startScreenFXML.fxml"));
-		//root.getStylesheets().add(getClass().getResource("mainMenuStyle.css").toExternalForm());
-		
+		Parent root = FXMLLoader.load(getClass().getResource("/voxspell_login/startScreenFXML.fxml"));		
 		Scene scene = new Scene(root);
-		//new SceneMediator().addScene("mainMenu",scene);
-
-		//root = FXMLLoader.load(getClass().getResource("NewGameFXML.fxml"));
-		//scene = new Scene(root);
-		//new SceneMediator().addScene("newGame", scene);
-
-		//new SceneMediator().setSceneStyle();
-
-		//new SceneMediator().showScene(stage, "mainMenu");
 		stage.setScene(scene);
-		//new SceneMediator().setSceneStyle(scene);
 
 
 		stage.show();

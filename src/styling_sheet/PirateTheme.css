@@ -104,3 +104,11 @@
 #galleryPreviewForest{
 	-fx-image: url("/game_resources/background.png");
 }
+
+#galleryPreviewSpooky{
+	-fx-image: url("/game_resources/spookyPreview.gif");
+}
+
+#galleryPreviewBuck{
+	-fx-image: url("/game_resources/bigPreview.gif");
+}

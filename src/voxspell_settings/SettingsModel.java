@@ -10,20 +10,28 @@ import java.util.List;
 import voxspell_project.FileHandler;
 import voxspell_project.User;
 
+/**
+ * This class is the model associated with the settings GUI. It generates the
+ * output for the comboboxes for the settings controller.
+ * 
+ * @author jacky
+ *
+ */
+
 public class SettingsModel {
 	private ArrayList<String> levels;
 	private ArrayList<String> voices = new ArrayList<String>();
 	private String fileName;
 	private ArrayList<String> BGM = new ArrayList<String>();
 	private ArrayList<String> gameBGM = new ArrayList<String>();
+	private FileHandler fileHandle = new FileHandler();
 
 	public SettingsModel(){
-		makeRequiredSettingsFile();
+		fileName = fileHandle.getSetting("File:", User.getInstance().getUserSettings());
+		fileHandle.setSpellingList(fileName);
 		generateLevels();
 		generateVoices();
 		generateBGM();
-		fileName = new FileHandler().getSetting("File:", ".settings.ini");
-
 	}
 
 	public void generateVoices(){
@@ -47,7 +55,7 @@ public class SettingsModel {
 	}
 	
 	public void generateLevels(){
-		levels = new FileHandler().generateLevels();
+		levels = fileHandle.generateLevels();
 	}
 	
 	public ArrayList<String> getLevels() {
@@ -109,22 +117,6 @@ public class SettingsModel {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-	
-	public void makeRequiredSettingsFile(){
-		if(!new FileHandler().fileExists(".settings.ini")){
-			new FileHandler().makeFile(".settings.ini");
-			new FileHandler().writeToFile(".settings.ini", "File: NZCER-spelling-lists.txt");
-			levels = new FileHandler().generateLevels();
-			new FileHandler().writeToFile(".settings.ini", "Level: "+levels.get(0));
-			generateVoices();
-			new FileHandler().writeToFile(".settings.ini", "Voice: "+voices.get(0));
-			new FileHandler().writeToFile(".settings.ini", "Theme: Forest");
-			generateBGM();
-			new FileHandler().writeToFile(".settings.ini", "BGM: .resources/BGM/MainMenu_BGM/Ambler.wav");
-			generateGameBGM();
-			new FileHandler().writeToFile(".settings.ini", "GameBGM: .resources/BGM/Game_BGM/Call to Adventure.wav");
 		}
 	}
 

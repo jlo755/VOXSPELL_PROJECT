@@ -17,26 +17,22 @@ import voxspell_project.User;
 
 
 /**
+ * This class is a scene mediator, and is notified when the scene must change. It will change
+ * the scene associated with the stage (top-container) and appropriately set the title and
+ * apply the style sheet to the new scene.
  *
  * @author jacky
  */
 public class SceneMediator{;
     String _theme = new FileHandler().getSetting("Theme:", User.getInstance().getUserSettings());
-    	
     
-    /*public void addScene(String nameOfScene, Scene scene){
-        _scene.put(nameOfScene, scene);
-    }
-    
-    public void showScene(Stage stage, String sceneToSet){
-        stage.setScene(_scene.get(sceneToSet));
-    }*/
-    
-    public void setSceneStyle(Scene scene){ 
-    	/*for(Scene scene:_scene.values()){
-            scene.getStylesheets().add(getClass().getResource(_theme).toExternalForm());
-    	}*/
+    public void setSceneStyle(Scene scene){
+    	/*
+    	 * This method sets the CSS associated with the scene.
+    	 */
     	if(_theme.equals("Pirate")){
+    		// credit to http://stackoverflow.com/questions/17769388/javafx-change-css-at-runtime
+    		// for the following code on how to change CSS sheet dynamically
     		scene.getStylesheets().add(getClass().getResource("/styling_sheet/PirateTheme.css").toExternalForm());
     	} else if (_theme.equals("Forest")){
     		scene.getStylesheets().add(getClass().getResource("/styling_sheet/MagicalForestTheme.css").toExternalForm());
@@ -44,7 +40,6 @@ public class SceneMediator{;
     }
     
     public void changeScene(Stage stage, String fxml, String titleOfScene){
-        System.out.println(User.getInstance().getUser());
     	Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource(fxml));

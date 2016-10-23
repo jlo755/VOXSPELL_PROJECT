@@ -18,12 +18,12 @@
                <content>
                   <AnchorPane prefHeight="305.0" prefWidth="628.0">
                      <children>
-                        <ImageView id="video" fx:id="video1" fitHeight="147.0" fitWidth="282.0" layoutX="22.0" layoutY="3.0" onMousePressed="#video1Action" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="video" fx:id="video1" fitHeight="147.0" fitWidth="282.0" layoutX="22.0" layoutY="3.0" onMousePressed="#buyVideoAction" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/game_resources/wood_button.png" />
                            </image>
                         </ImageView>
-                        <ImageView id="video" fx:id="video2" fitHeight="147.0" fitWidth="298.0" layoutX="27.0" layoutY="143.0" onMousePressed="#video2Action" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="video" fx:id="video2" fitHeight="147.0" fitWidth="298.0" layoutX="27.0" layoutY="143.0" onMousePressed="#buyVideoAction" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/game_resources/wood_button.png" />
                            </image>

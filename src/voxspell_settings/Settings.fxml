@@ -23,7 +23,7 @@
             </Label>
             <ScrollPane layoutX="35.0" layoutY="53.0" prefHeight="332.0" prefWidth="322.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="448.0" prefWidth="300.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="300.0">
                      <children>
                         <ComboBox fx:id="spellingLevelCombo" layoutX="79.0" layoutY="222.0" prefWidth="150.0" />
                         <Label layoutX="105.0" layoutY="200.0" text="Spelling Level" />

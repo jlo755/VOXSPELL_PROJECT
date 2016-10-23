@@ -24,6 +24,15 @@ import javafx.util.Duration;
 import voxspell_project.FileHandler;
 import voxspell_project.User;
 
+/**
+ * This class utilises the javaFX thread, and can only operate on it. This class is a singletown
+ * in charge of playing music when given a file. The volume can be set, and the song can change
+ * accordingly.
+ * 
+ * @author jacky
+ *
+ */
+
 public class MusicPlayer{
 	private static MusicPlayer _instance;
 	private String _file;
@@ -72,16 +81,17 @@ public class MusicPlayer{
 	        FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 	        volume.setValue(-30.0f);
 	        clip.start();
+	        // credit to http://stackoverflow.com/questions/11919009/using-javax-sound-sampled-clip-to-play-loop-and-stop-mutiple-sounds-in-a-game
+	        // for the following loop code.
 	        clip.loop(clip.LOOP_CONTINUOUSLY);
 	    } catch(Exception ex) {
-	        System.out.println("Error with playing sound.");
 	        ex.printStackTrace();
 	    }
 
 	}
 
-	private void stop(){
-		if(_playing && !_file.equals(new FileHandler().getSetting("BGM:", ".settings.ini"))){
+	public void stop(){
+		if(_playing && !_file.equals(new FileHandler().getSetting("currentBGM:", User.getInstance().getUserSettings()))){
 			clip.stop();
 			//mediaPlayer.stop();
 			_playing = false;

@@ -17,15 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class does ALL file handling, it writes, clears, appends, increments, and does
+ * all kinds of file-related work inorder for the spelling-app to work.
  *
  * @author jacky
  */
 public class FileHandler {
-	String[] _files = {".mastered.txt",".stats.txt",".failed.txt",".faulted.txt"};
 	String spellingList;
 
 	public FileHandler(){
-		spellingList = getSetting("File:", ".settings.ini");
+		//spellingList = getSetting("File:", User.getInstance().getUserSettings());
 	}
 
 	public void clearFile(String fileName){
@@ -137,6 +138,11 @@ public class FileHandler {
 	}
 
 	public ArrayList<String> generateLevels(){
+		/*
+		 * This method generates the levels associated with a spelling list.
+		 */
+		// credit to http://stackoverflow.com/questions/4716503/reading-a-plain-text-file-in-java
+		// for the following code on how to read files line by line.
 		ArrayList<String> levels = new ArrayList<String>();
 		FileReader fileReader;
 		try {
@@ -157,6 +163,9 @@ public class FileHandler {
 	}
 
 	public ArrayList<String> generateStatsLevels(){
+		/*
+		 * This method generates the levels associated with a stats file.
+		 */
 		ArrayList<String> levels = new ArrayList<String>();
 		FileReader fileReader;
 		try {
@@ -176,6 +185,9 @@ public class FileHandler {
 	}
 	
 	public ArrayList<Integer> generateHistoryScore(){
+		/*
+		 * This method generates the history score associated with a user.
+		 */
 		ArrayList<Integer> scores = new ArrayList<Integer>();
 		FileReader fileReader;
 		try {
@@ -202,7 +214,6 @@ public class FileHandler {
 		 * retrieve the word list associated with a file.
 		 */
 		String word = null;
-		System.out.println(level);
 		List<String> words = new ArrayList<String>();
 		FileReader fileReader;
 		try {
@@ -234,6 +245,11 @@ public class FileHandler {
 	}
 
 	public void incrementValue(String file, String detail, int increment){
+		/*
+		 * This method increments the value of a detail in a file. For example,
+		 * coins associated with a user. The : must be included - in the format
+		 * Coins: 100
+		 */
 		try {
 			File tempFile = new File(".TempFile.txt");
 			File inputFile = new File(file);
@@ -257,6 +273,10 @@ public class FileHandler {
 	}
 
 	public String getSetting(String detail, String file){
+		/*
+		 * This returns the detail associated with a setting. For example,
+		 * detail Coin: will return the amount of coins associated.
+		 */
 		FileReader fileReader;
 		try {
 			fileReader = new FileReader(file);
@@ -288,7 +308,6 @@ public class FileHandler {
 					}
 				}
 			}
-			System.out.println(boughtItems);
 			return boughtItems;
 		} catch (Exception e){
 			e.printStackTrace();
@@ -297,6 +316,9 @@ public class FileHandler {
 	}
 	
 	public void addPurchase(String user, String purchase, String type){
+		/*
+		 * This adds a purchase to the user's text file.
+		 */
 		ArrayList<String> itemsBought = getUserItems(type, user);
 		String toRemove = ""+type;
 		for(String e: itemsBought){

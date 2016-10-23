@@ -8,6 +8,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+/**
+ * This class is the controller for the popup dialog that appears at the end of a spelling level.
+ * 
+ * @author jacky
+ *
+ */
+
 
 public class CompleteLevelDialogController implements Initializable{
 

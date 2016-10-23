@@ -195,8 +195,10 @@ public class MediaPlayer extends JFrame implements ActionListener, WindowListene
 	}
 
 	// This makes sure that only the video terminates, and not the entire spelling application.
+	// Originally by Victor, has now extended upon to include the music to replay when closed.
 	@Override
 	public void windowClosing(WindowEvent arg0) {
+		MusicPlayer.getInstance().execute();
 		rewardVideo.stop();
 	}
 

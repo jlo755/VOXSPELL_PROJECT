@@ -13,18 +13,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import voxspell_media_handler.MusicPlayer;
 import voxspell_project.FileHandler;
 import voxspell_project.User;
 
+/**
+ * This class is the controller for the settings GUI. Specifically
+ * it handles the generation and editting of the user's settings,
+ * and provides the available options to the user.
+ * 
+ * @author jacky
+ *
+ */
+
 public class SettingsController implements Initializable {
-	
+
 	SettingsModel _model;
 	@FXML ComboBox<String> spellingLevelCombo;
 	@FXML ComboBox<String> voicesCombo;
@@ -37,38 +48,52 @@ public class SettingsController implements Initializable {
 
 	@FXML
 	public void confirmAction(ActionEvent event){
+		/*
+		 * Specifically, this method is to correctly generate the new settings, and to 
+		 * create associated files for these new settings. It will also change the BGM.
+		 */
 		FileHandler fileHandle = new FileHandler();
 		generateSettings();
 		new MusicPlayer().getInstance().setVolume((float) volume.getValue());
-		new MusicPlayer().getInstance().setFile(new FileHandler().getSetting("BGM:", ".settings.ini"));
+		new MusicPlayer().getInstance().setFile(new FileHandler().getSetting("currentBGM:", User.getInstance().getUserSettings()));
 		new MusicPlayer().getInstance().execute();
 		String fileName = User.getInstance().getUser()+"/.stats/"+fileField.getText().split("/")
 				[fileField.getText().split("/").length-1];
-		fileHandle.makeFile(fileName);
-		for(String e: spellingLevelCombo.getItems()){
-			fileHandle.writeToFile(fileName, e.replaceAll("\\s+", "")+"Success: 0");
-			fileHandle.writeToFile(fileName, e.replaceAll("\\s+", "")+"Failure: 0");
+
+		if(!fileHandle.fileExists(fileName)){
+			fileHandle.makeFile(fileName);
+			for(String e: spellingLevelCombo.getItems()){
+				fileHandle.writeToFile(fileName, e.replaceAll("\\s+", "")+"Success: 0");
+				fileHandle.writeToFile(fileName, e.replaceAll("\\s+", "")+"Failure: 0");
+			}
 		}
 		Stage stage = (Stage) confirm.getScene().getWindow();
-	    stage.close();
+		stage.close();
 	}
-	
+
 	@FXML
 	public void cancelAction(ActionEvent event){
-	    Stage stage = (Stage) confirm.getScene().getWindow();
-	    stage.close();
+		Stage stage = (Stage) confirm.getScene().getWindow();
+		stage.close();
 	}
-	
+
 	private void generateSettings(){
+		/*
+		 * This method will rewrite the settings in the user file. to what is selected in the
+		 * settings comboboxes.
+		 */
 		FileHandler fileHandle = new FileHandler();
-		fileHandle.clearFile(".settings.ini");
-		fileHandle.writeToFile(".settings.ini", "Level: "+spellingLevelCombo.getValue());
-		fileHandle.writeToFile(".settings.ini", "Voice: "+voicesCombo.getValue());
-	    fileHandle.writeToFile(".settings.ini", "File: "+fileField.getText());
-		fileHandle.writeToFile(".settings.ini", "BGM: .resources/BGM/MainMenu_BGM/"+bgmCombo.getValue());
-		fileHandle.writeToFile(".settings.ini", "GameBGM: .resources/BGM/Game_BGM/Call to Adventure.wav");
+		String fileName = User.getInstance().getUserSettings();
+		fileHandle.removingWord(fileName, "Level: "+fileHandle.getSetting("Level:", fileName));
+		fileHandle.writeToFile(fileName, "Level: "+spellingLevelCombo.getValue());
+		fileHandle.removingWord(fileName, "Voice: "+fileHandle.getSetting("Voice:", fileName));
+		fileHandle.writeToFile(fileName, "Voice: "+voicesCombo.getValue());
+		fileHandle.removingWord(fileName, "File: "+fileHandle.getSetting("File:", fileName));
+		fileHandle.writeToFile(fileName, "File: "+fileField.getText());
+		fileHandle.removingWord(fileName, "currentBGM: "+fileHandle.getSetting("currentBGM:", fileName));
+		fileHandle.writeToFile(fileName, "currentBGM: .resources/BGM/MainMenu_BGM/"+bgmCombo.getValue());
 	}
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		_model = new SettingsModel();
@@ -76,30 +101,56 @@ public class SettingsController implements Initializable {
 		voicesCombo.getItems().addAll(_model.getVoices());
 		bgmCombo.getItems().addAll(_model.getBGM());
 		setComboBoxes();
-		
+
 	}
-	
-	
+
+
 	public void setComboBoxes(){
+		/*
+		 * Sets the combobox to the user's current states.
+		 */
 		FileHandler fileHandler = new FileHandler();
-			voicesCombo.setValue(fileHandler.getSetting("Voice:", ".settings.ini"));
-			spellingLevelCombo.setValue(fileHandler.getSetting("Level:", ".settings.ini"));
-			fileField.setText(fileHandler.getSetting("File:", ".settings.ini"));
-			bgmCombo.setValue(fileHandler.getSetting("BGM:", ".settings.ini").split(".resources/BGM/MainMenu_BGM/")[1]);
-			volume.setValue(new MusicPlayer().getInstance().getVolume()*1000);
+		voicesCombo.setValue(fileHandler.getSetting("Voice:", User.getInstance().getUserSettings()));
+		spellingLevelCombo.setValue(fileHandler.getSetting("Level:", User.getInstance().getUserSettings()));
+		fileField.setText(fileHandler.getSetting("File:", User.getInstance().getUserSettings()));
+		bgmCombo.setValue(fileHandler.getSetting("currentBGM:", User.getInstance().getUserSettings()).split(".resources/BGM/MainMenu_BGM/")[1]);
+		volume.setValue(new MusicPlayer().getInstance().getVolume()*1000);
 	}
-	
+
 	public void uploadFileAction(){
+		/*
+		 * This method handles the uploading of files. It will throw an error
+		 * if the file does not follow the % format, or does not end in .txt.
+		 */
+		// credit to http://docs.oracle.com/javafx/2/ui_controls/file-chooser.htm
+		// for the file choosing code
 		FileHandler fileHandle = new FileHandler();
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog((Stage)uploadFile.getScene().getWindow());
-		fileField.setText((file.getAbsolutePath()));
-		System.out.println(file.getAbsolutePath());
-		fileHandle.setSpellingList(fileField.getText());
-		_model.setLevels(fileHandle.generateLevels());
-		spellingLevelCombo.getItems().clear();
-		spellingLevelCombo.getItems().addAll(_model.getLevels());
-		spellingLevelCombo.setValue(_model.getLevels().get(0));
+		if(file.getAbsolutePath().contains(".txt")){ // checks if the file contaisn the .txt extension
+			fileHandle.setSpellingList(file.getAbsolutePath());
+			_model.setLevels(fileHandle.generateLevels());
+			if(!_model.getLevels().isEmpty()){ // checks if the file contains the appropriate format
+				fileField.setText((file.getAbsolutePath()));
+				spellingLevelCombo.getItems().clear();
+				spellingLevelCombo.getItems().addAll(_model.getLevels());
+				spellingLevelCombo.setValue(_model.getLevels().get(0));
+			} else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error");
+				alert.setHeaderText("Invalid file!");	
+				alert.setContentText("Uploaded file does not follow the format!");
+				alert.show();
+			}
+
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Invalid file!");	
+			alert.setContentText("Uploaded file must be a text file.");
+			alert.show();
+		}
+
 	}
 
 }

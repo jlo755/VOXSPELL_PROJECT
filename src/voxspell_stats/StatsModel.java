@@ -14,6 +14,15 @@ import javafx.scene.chart.XYChart;
 import voxspell_project.FileHandler;
 import voxspell_project.User;
 
+/**
+ * This class is the model associated with a Stats GUI. It handles operations such as
+ * handling the data associated with th charts in the view. And notifying the controller
+ * to update its view.
+ * 
+ * @author jacky
+ *
+ */
+
 public class StatsModel {
 	private ArrayList<String> spellingList = new ArrayList<String>();
 	private StatsController _controller;
@@ -55,6 +64,9 @@ public class StatsModel {
 	}
 
 	public void generateList(){
+		/*
+		 * This method generates the spelling list the user has uploaded/attempted.
+		 */
 		String bashCmd = "ls "+User.getInstance().getUser()+"/.stats";
 		ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", bashCmd);
 		Process process;
@@ -74,12 +86,18 @@ public class StatsModel {
 	}
 
 	public void generateLevel(String fileName){
+		/*
+		 * This method generates the levels associated with that spelling list.
+		 */
 		FileHandler fileHandle = new FileHandler();
 		fileHandle.setSpellingList(User.getInstance().getUser()+".stats/"+fileName);
 		levelList = fileHandle.generateStatsLevels();
 	}
 
 	public void generatePieChartData(String level, String list){
+		/*
+		 * This method generates the pie chart data associated with a spelling level.
+		 */
 		pieChartData.clear();
 		String fileName = User.getInstance().getUser()+".stats/"+list;
 		String success = new FileHandler().getSetting(level.replaceAll("\\s+", "")+"Success:", fileName);
@@ -95,6 +113,10 @@ public class StatsModel {
 	}
 	
 	public void generateLineChartData(){
+		/*
+		 * this method generates the data of the user's spelling history from their
+		 * previous attempts.
+		 */
 		ArrayList<Integer> scores = new FileHandler().generateHistoryScore();
 		int count = 1;
 		for(int e: scores){
