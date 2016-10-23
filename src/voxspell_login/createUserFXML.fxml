@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="262.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell_login.createUserController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Button fx:id="confirm" layoutX="175.0" layoutY="210.0" mnemonicParsing="false" onAction="#confirmAction" text="Confirm" />
+            <Button fx:id="cancel" layoutX="273.0" layoutY="210.0" mnemonicParsing="false" onAction="#cancelAction" text="Cancel" />
+            <TextField fx:id="userField" layoutX="165.0" layoutY="51.0" />
+            <Label layoutX="87.0" layoutY="56.0" text="Username:" />
+            <Label layoutX="36.0" layoutY="168.0" prefHeight="16.0" prefWidth="127.0" text="Confirm Password:" />
+            <Label layoutX="90.0" layoutY="113.0" text="Password:" />
+            <PasswordField fx:id="pwField" layoutX="165.0" layoutY="108.0" />
+            <PasswordField fx:id="confirmPwField" layoutX="165.0" layoutY="163.0" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

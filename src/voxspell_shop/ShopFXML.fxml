@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="434.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell_shop.ShopController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Button fx:id="back" layoutX="18.0" layoutY="15.0" mnemonicParsing="false" onAction="#backAction" text="Back" />
+            <ScrollPane id="scroll" fx:id="scroll" layoutX="24.0" layoutY="69.0" prefHeight="312.0" prefWidth="657.0">
+               <content>
+                  <AnchorPane prefHeight="305.0" prefWidth="628.0">
+                     <children>
+                        <ImageView id="video" fx:id="video1" fitHeight="147.0" fitWidth="282.0" layoutX="22.0" layoutY="3.0" onMousePressed="#video1Action" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/game_resources/wood_button.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="video" fx:id="video2" fitHeight="147.0" fitWidth="298.0" layoutX="27.0" layoutY="143.0" onMousePressed="#video2Action" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/game_resources/wood_button.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="theme" fx:id="pirateTheme" fitHeight="147.0" fitWidth="282.0" layoutX="309.0" layoutY="3.0" onMousePressed="#buyThemeAction" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/game_resources/wood_button.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="bgm" fx:id="bgm1" fitHeight="147.0" fitWidth="282.0" layoutX="324.0" layoutY="143.0" onMousePressed="#buyBGMAction" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/game_resources/wood_button.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <Label id="coinLabel" fx:id="coinLabel" alignment="CENTER_RIGHT" layoutX="469.0" layoutY="24.0" prefHeight="34.0" prefWidth="179.0" text="Coins: xxx">
+               <font>
+                  <Font name="Sawasdee Bold" size="22.0" />
+               </font>
+            </Label>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
