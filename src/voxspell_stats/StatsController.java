@@ -12,8 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import voxspell_project.FileHandler;
-import voxspell_project.User;
+import voxspell_utility.FileHandler;
+import voxspell_utility.User;
 
 /**
  * This class is the controller to the Stats GUI. It handles user related input such as notifying
@@ -39,6 +39,10 @@ public class StatsController implements Initializable {
 	
 	@FXML
 	public void listComboAction(){
+		/*
+		 * This method is called when there's a change or an action in the spelling list drop down box.
+		 * It will then recreate the spelling levels and generate the associated data for this new list.
+		 */
 		String levelGenerate = listCombo.getValue()+"";
 		levelCombo.getItems().clear();
 		_model.getLevelList().clear();
@@ -51,6 +55,10 @@ public class StatsController implements Initializable {
 	
 	@FXML
 	public void levelComboAction(ActionEvent e){
+		/*
+		 * This method is called when there's a change in the level drop down box. It will recreate
+		 * the model and then reallocate this to the pie graph to update its view.
+		 */
 		_model.generatePieChartData(""+levelCombo.getValue(), ""+listCombo.getValue());
 		setGraphData();
 	}
@@ -97,6 +105,9 @@ public class StatsController implements Initializable {
 	}
 	
 	private void setGraphData(){
+		/*
+		 * This method sets the title and the 'model' of the pie graph.
+		 */
 		pieChart.setTitle(""+levelCombo.getValue());
 		pieChart.setData(_model.getPieChartData());
 	}

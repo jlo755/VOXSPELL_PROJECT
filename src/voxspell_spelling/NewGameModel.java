@@ -11,8 +11,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import voxspell_media_handler.VoiceWorker;
-import voxspell_project.FileHandler;
-import voxspell_project.User;
+import voxspell_utility.FileHandler;
+import voxspell_utility.User;
 
 /**
  * This is the model associated with a new game. It handles operations such as
@@ -108,6 +108,14 @@ public class NewGameModel {
 	public int getWordsCorrect(){
 		return this._wordsCorrect;
 	}
+	
+	public int get_listSize() {
+		return _listSize;
+	}
+
+	public void set_listSize(int _listSize) {
+		this._listSize = _listSize;
+	}
 
 	protected int getIterations(){
 		return this._iterations;
@@ -150,10 +158,10 @@ public class NewGameModel {
 		 * failed if it does not exist. if review is specified, it will prompt users if they
 		 * want to know how to spell a word if it is failed again
 		 */
-		if(_iterations < _words.size()){
-			_controller.setUserSpell("Spell word: "+(getIterations()+1)+" of "+_words.size()+"");
+		if(_iterations < this._listSize){
+			_controller.setUserSpell("Spell word: "+(getIterations()+1)+" of "+this._listSize+"");
 		} else {
-			_controller.setUserSpell("Complete!\nYou have spelt: "+_wordsCorrect+" words correct!");
+			_controller.setUserSpell("Complete!\nYou have spelt: "+_wordsCorrect+" words correctly!");
 			_controller.endGameDisableButtons();
 			new FileHandler().incrementValue(_user.getUserSettings(), "Coins:", _wordsCorrect*10);
 			_controller.endGameDialog();

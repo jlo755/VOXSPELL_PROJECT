@@ -27,8 +27,8 @@ import voxspell_dialog.CompleteLevelDialogController;
 import voxspell_dialog.dialogController;
 import voxspell_media_handler.MediaPlayer;
 import voxspell_media_handler.SceneMediator;
-import voxspell_project.FileHandler;
-import voxspell_project.User;
+import voxspell_utility.FileHandler;
+import voxspell_utility.User;
 
 /**
  * This class is the controller for the shop class. It handles the purchasing of themes, bgms, and
@@ -64,33 +64,47 @@ public class ShopController implements Initializable  {
 	}
 
 	private void evaluateAvailableVideos(){
+		/*
+		 * This method evaluates the available videos that have not been bought yet. If they have been bought,
+		 * the purchasedButton id will be set to them, and the button will be disabled to prevent further purchases.
+		 */
 		ArrayList<String> videosAvailable = new FileHandler().getUserItems("Videos:", User.getInstance().getUserSettings());
 		for(String videos: videosAvailable)
 			switch (videos) {
-			case "video1":  video1.setId("unlockedButton");
+			case "video1":  video1.setId("purchasedButton");
 			video1.setDisable(true);
 			break;
-			case "video2":  video2.setId("unlockedButton");
+			case "video2":  video2.setId("purchasedButton");
 			video2.setDisable(true);
 			break;
 			}
 	}
 
 	private void evaluateAvailableThemes(){
+		/*
+		 * This method evaluates the available themes that have not been bought yet. If they have been bought,
+		 * the purchasedButton id will be set to them to apply the purchased image to the button, and the button will be 
+		 * disabled to prevent further purchases.
+		 */
 		ArrayList<String> themesAvailable = new FileHandler().getUserItems("Themes:", User.getInstance().getUserSettings());
 		for(String themes: themesAvailable)
 			switch (themes) {
-			case "Pirate":  pirateTheme.setId("unlockedButton");
+			case "Pirate":  pirateTheme.setId("purchasedButton");
 			pirateTheme.setDisable(true);
 			break;
 			}
 	}
 	
 	private void evaluateAvailableBGM(){
+		/*
+		 * This method evaluates the available BGM that have not been bought yet. If they have been bought,
+		 * the purchasedButton id will be set to them to apply the purchased image to the button, and the button will be 
+		 * disabled to prevent further purchases.
+		 */
 		ArrayList<String> bgmAvailable = new FileHandler().getUserItems("BGM:", User.getInstance().getUserSettings());
 		for(String bgm: bgmAvailable)
 			switch (bgm) {
-			case "Happy_Alley.wav":  bgm1.setId("unlockedButton");
+			case "Happy_Alley.wav":  bgm1.setId("purchasedButton");
 			bgm1.setDisable(true);
 			break;
 			}
@@ -98,13 +112,17 @@ public class ShopController implements Initializable  {
 
 	@FXML
 	public void buyVideoAction(MouseEvent e){
+		/*
+		 * This action event is called when the but video button is pressed. It will evaluate whether the
+		 * user will have enough money to make the purchase, and prompt the user for confirmation.
+		 */
 		String video = "";
 		if(e.getSource() == video1){
 			video = "Big Bucks Bunny";
 			confirmPurchase(video1, video);
 		} else if(e.getSource() == video2){
 			video ="Spooky Big Bucks Bunny";
-			confirmPurchase(video2, video);
+			confirmPurchase(video2, video);		
 		}
 		
 		
@@ -117,7 +135,7 @@ public class ShopController implements Initializable  {
 		 */
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Are you sure?");
-		alert.setHeaderText("Video: "+video+"\nCost: 1000 coins");	
+		alert.setHeaderText("Video: "+video+"\nCost: 300 coins");	
 		alert.setContentText("Are you sure you want to buy it?");
 		Optional<ButtonType> result = alert.showAndWait();
 		String name = "";
@@ -127,11 +145,15 @@ public class ShopController implements Initializable  {
 			name = "video2";
 		}
 		if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
-			if(confirmPurchase(1000)){
-				new FileHandler().incrementValue(User.getInstance().getUserSettings(), "Coins:", -1000);
+			if(confirmPurchase(300)){
+				new FileHandler().incrementValue(User.getInstance().getUserSettings(), "Coins:", -300);
+				// removes 300 coins from the user's settings file
 				new FileHandler().addPurchase(User.getInstance().getUserSettings(), name, "Videos:");
-				video1.setId("unlockedButton");
+				// adds the purchase or video to the user's settings file
+				video1.setId("purchasedButton"); // set the purchasedButton id to prevent further purchases
 				video1.setDisable(true);
+				// update the coin label after this purchase
+				setCoinLabel("Coins: "+new FileHandler().getSetting("Coins:", User.getInstance().getUserSettings()));
 			} else {
 				Alert error = new Alert(AlertType.ERROR);
 				error.setTitle("Error!");
@@ -144,22 +166,28 @@ public class ShopController implements Initializable  {
 
 	@FXML
 	public void buyThemeAction(MouseEvent e){
+		/*
+		 * This action event is notified when the theme button has been pressed. It will evaluate
+		 * whether the user has 500 coins to buy the theme, a confirmation will appear asking for
+		 * the user to confirm his purchase.
+		 */
 		String theme = "";
 		if(e.getSource() == pirateTheme){
 			theme = "Pirate";
 		}
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Are you sure?");
-		alert.setHeaderText("Theme: "+theme+"\nCost: 10000 coins");	
+		alert.setHeaderText("Theme: "+theme+"\nCost: 500 coins");	
 		alert.setContentText("Are you sure you want to buy it?");
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
-			if(confirmPurchase(10000)){
-				new FileHandler().incrementValue(User.getInstance().getUserSettings(), "Coins:", -10000);
+			if(confirmPurchase(500)){
+				new FileHandler().incrementValue(User.getInstance().getUserSettings(), "Coins:", -500);
 				new FileHandler().addPurchase(User.getInstance().getUserSettings(), theme, "Themes:");
-				pirateTheme.setId("unlockedButton");
+				pirateTheme.setId("purchasedButton");
 				pirateTheme.setDisable(true);
+				setCoinLabel("Coins: "+new FileHandler().getSetting("Coins:", User.getInstance().getUserSettings()));
 			} else {
 				Alert error = new Alert(AlertType.ERROR);
 				error.setTitle("Error!");
@@ -172,22 +200,28 @@ public class ShopController implements Initializable  {
 
 	@FXML
 	public void buyBGMAction(MouseEvent e){
+		/*
+		 * This action event is notified when the BGM button has been pressed. It will evaluate
+		 * whether the user has 100 coins to buy the theme, a confirmation will appear asking for
+		 * the user to confirm his purchase.
+		 */
 		String song = "";
 		if(e.getSource() == bgm1){
 			song = "Happy_Alley";
 		}
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Are you sure?");
-		alert.setHeaderText("BGM: "+song+"\nCost: 2000 coins");	
+		alert.setHeaderText("BGM: "+song+"\nCost: 100 coins");	
 		alert.setContentText("Are you sure you want to buy it?");
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
-			if(confirmPurchase(2000)){
-				new FileHandler().incrementValue(User.getInstance().getUserSettings(), "Coins:", -2000);
+			if(confirmPurchase(100)){
+				new FileHandler().incrementValue(User.getInstance().getUserSettings(), "Coins:", -100);
 				new FileHandler().addPurchase(User.getInstance().getUserSettings(), song+".wav", "BGM:");
-				bgm1.setId("unlockedButton");
+				bgm1.setId("purchasedButton");
 				bgm1.setDisable(true);
+				setCoinLabel("Coins: "+new FileHandler().getSetting("Coins:", User.getInstance().getUserSettings()));
 			} else {
 				Alert error = new Alert(AlertType.ERROR);
 				error.setTitle("Error!");
@@ -205,6 +239,9 @@ public class ShopController implements Initializable  {
 	}
 
 	public boolean confirmPurchase(int cost){
+		/*
+		 * Confirms that the user has enough coins to make the purchase.
+		 */
 		if(cost<=Integer.parseInt(new FileHandler().getSetting("Coins:", User.getInstance().getUserSettings()))){
 			return true;
 		} else {

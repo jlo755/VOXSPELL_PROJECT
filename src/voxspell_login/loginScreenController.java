@@ -16,8 +16,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import voxspell_media_handler.MusicPlayer;
 import voxspell_media_handler.SceneMediator;
-import voxspell_project.FileHandler;
-import voxspell_project.User;
+import voxspell_utility.FileHandler;
+import voxspell_utility.User;
 
 /**
  * This class is the controller for the login screen GUI. It handles the login interaction with the user.
@@ -90,6 +90,7 @@ public class loginScreenController implements Initializable{
 
 	@FXML
 	public void cancelAction(){
+		// this action event will take the user back to the start screen
 		Stage stage = (Stage) login.getScene().getWindow();
 	    Parent root;
 		try {
@@ -97,6 +98,7 @@ public class loginScreenController implements Initializable{
 	        stage.setTitle("Login Screen");
 	        Scene scene = new Scene(root);
 	        stage.setScene(scene);
+	        scene.getStylesheets().add(getClass().getResource("/styling_sheet/StartMenu.css").toExternalForm());
 	        stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();

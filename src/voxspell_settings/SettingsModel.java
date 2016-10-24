@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import voxspell_project.FileHandler;
-import voxspell_project.User;
+import voxspell_utility.FileHandler;
+import voxspell_utility.User;
 
 /**
  * This class is the model associated with the settings GUI. It generates the
@@ -35,6 +35,10 @@ public class SettingsModel {
 	}
 
 	public void generateVoices(){
+		/*
+		 * This method generates the voices for the combo box to display - it utilises bash commands
+		 * to generate the festival voices assuming the path is in the default location.
+		 */
 		String bashCmd = "ls /usr/share/festival/voices/english";
 		ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", bashCmd);
 		Process process;
@@ -55,6 +59,7 @@ public class SettingsModel {
 	}
 	
 	public void generateLevels(){
+		// This method generates the required levels for the level combobox for the view.
 		levels = fileHandle.generateLevels();
 	}
 	
@@ -79,45 +84,12 @@ public class SettingsModel {
 	}
 	
 	private void generateBGM(){
-		/*String bashCmd = "ls .resources/BGM/MainMenu_BGM";
-		ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", bashCmd);
-		Process process;
-		try {
-			process = builder.start();
-			InputStream stdout = process.getInputStream();
-			BufferedReader stdoutBuffered = new BufferedReader(new InputStreamReader(stdout));
-			String bgm = stdoutBuffered.readLine();
-			while ((bgm  != null)) {
-
-				BGM.add(bgm);
-				bgm = stdoutBuffered.readLine();
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
+		/*
+		 * This method merely generates the BGM list for the BGM combo box, by reading the available
+		 * BGM available to the user.
+		 */
 		ArrayList<String> bgm  = new FileHandler().getUserItems("BGM:", User.getInstance().getUserSettings());
 		BGM.addAll(bgm);
-	}
-	
-	private void generateGameBGM(){
-		String bashCmd = "ls .resources/BGM/Game_BGM";
-		ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", bashCmd);
-		Process process;
-		try {
-			process = builder.start();
-			InputStream stdout = process.getInputStream();
-			BufferedReader stdoutBuffered = new BufferedReader(new InputStreamReader(stdout));
-			String bgm = stdoutBuffered.readLine();
-			while ((bgm  != null)) {
-
-				gameBGM.add(bgm);
-				bgm = stdoutBuffered.readLine();
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public ArrayList<String> getBGM() {

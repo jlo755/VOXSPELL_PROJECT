@@ -8,8 +8,8 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="login" layoutX="314.0" layoutY="177.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="26.0" prefWidth="67.0" text="Login" />
-            <Button fx:id="create" layoutX="288.0" layoutY="222.0" mnemonicParsing="false" onAction="#createAction" text="Create Account" />
+            <Button fx:id="login" layoutX="288.0" layoutY="177.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="26.0" prefWidth="119.0" text="Login" />
+            <Button fx:id="create" layoutX="288.0" layoutY="235.0" mnemonicParsing="false" onAction="#createAction" text="Create Account" />
          </children>
     </AnchorPane>
   </children>

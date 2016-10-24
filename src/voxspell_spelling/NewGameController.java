@@ -30,9 +30,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import voxspell_dialog.CompleteLevelDialogController;
 import voxspell_media_handler.SceneMediator;
-import voxspell_project.FileHandler;
-import voxspell_project.MediaListener;
-import voxspell_project.User;
+import voxspell_utility.FileHandler;
+import voxspell_utility.MediaListener;
+import voxspell_utility.User;
 
 
 /**
@@ -90,6 +90,9 @@ public class NewGameController implements Initializable{
     
     @FXML
     private void textFieldEnterAction(KeyEvent event){
+    	/*
+    	 * This associates the text field with an enter key action event listener.
+    	 */
         if (event.getCode() == KeyCode.ENTER) {
             submitAction();
         }
@@ -97,6 +100,10 @@ public class NewGameController implements Initializable{
     
     @FXML
     private void shopAction(){
+    	/*
+    	 * This action occurs when the shop button is pressed. It will notify the scene mediator that the
+    	 * scene must be changed, and a media listener will then notify the program to switch the BGM.
+    	 */
     	Stage stage = (Stage) back.getScene().getWindow();
  	    new MediaListener().fireMainEvent();
      	new SceneMediator().changeScene(stage, "/voxspell_shop/ShopFXML.fxml", "Main Menu");
@@ -104,6 +111,10 @@ public class NewGameController implements Initializable{
     
     @FXML
     private void restartAction(){
+    	/*
+    	 * This action is called when the restart button is pressed. It will essentially
+    	 * generate a new game model to associate and execute this, and properly set visibility of the view.
+    	 */
     	 _model = new NewGameModel(false, this);
          _model.execute();
      	userSpell.setVisible(false);
@@ -116,9 +127,13 @@ public class NewGameController implements Initializable{
     
     @FXML
     private void startAction(ActionEvent event){
+    	/*
+    	 * This action is called when the start button is pressed, it will start the game
+    	 * and appropriately disable and reenable buttons and also start the model.
+    	 */
     	userSpell.setVisible(true);
     	submit.setVisible(true);
-    	wordLabel.setText("Spell word: "+(_model.getIterations()+1)+" of "+_model.getWordListSize()+"");
+    	wordLabel.setText("Spell word: "+(_model.getIterations()+1)+" of "+_model.get_listSize()+"");
     	start.setVisible(false);
     	relisten.setVisible(true);
     	_model.execute();
@@ -166,6 +181,10 @@ public class NewGameController implements Initializable{
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    	/*
+    	 * This method is called upon the initialization of the FXML file. It properly disables and
+    	 * sets the visibility of the view components.
+    	 */
          _model = new NewGameModel(false, this);
          _model.execute();
      	userSpell.setVisible(false);
@@ -175,7 +194,6 @@ public class NewGameController implements Initializable{
      	relisten.setVisible(false);
      	wordLabel.setText("Press start to begin...");
      	settings.setDisable(true);
-     	settings.setOpacity(100);
     }
     
     public void setUserSpell(String label){

@@ -12,6 +12,10 @@
 	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 
+#help {
+	-fx-image: url("/game_resources/logo_help.png");
+}
+
 #woodButton:hover{
 	-fx-image: url("/game_resources/wood_button_hover.png");
 }
@@ -37,19 +41,27 @@
 }
 
 #woodExitButton:hover{
-	-fx-image: url("/game_resources/wood_button_exit_hover.png");
+	-fx-image: url("/game_resources/wood_button_gallery_hover.png");
 }
 
 #woodExitButton{
-	-fx-image: url("/game_resources/wood_button_exit.png");
+	-fx-image: url("/game_resources/wood_button_gallery.png");
 }
 
-#unlockedButton:hover{
-	-fx-image: url("/game_resources/wood_button_unlocked_hover.png");
+#lockedButton:hover{
+	-fx-image: url("/game_resources/wood_button_locked_hover.png");
 }
 
-#unlockedButton{
-	-fx-image: url("/game_resources/wood_button_unlocked_hover.png");
+#lockedButton{
+	-fx-image: url("/game_resources/wood_button_locked_hover.png");
+}
+
+#purchasedButton:hover{
+		-fx-image: url("/game_resources/wood_button_purchased_hover.png");
+}
+
+#purchasedButton {
+	-fx-image: url("/game_resources/wood_button_purchased_hover.png");
 }
 
 #anchor {
@@ -70,7 +82,7 @@
 }
 
 #video {
-	-fx-image: url("/game_resources/wood_button_video_hover.png");
+	-fx-image: url("/game_resources/wood_button_video.png");
 }
 
 #video:hover {
@@ -98,7 +110,7 @@
 }
 
 #relistenButton{
-	-fx-image: url("../../.media/UNMUTED.png");
+	-fx-image: url("/game_resources/UNMUTED.png");
 }
 
 #galleryPreviewPirate{

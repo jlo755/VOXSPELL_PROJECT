@@ -1,7 +1,5 @@
 package voxspell_media_handler;
 
-import javax.swing.SwingWorker;
-
 import javafx.concurrent.Task;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 

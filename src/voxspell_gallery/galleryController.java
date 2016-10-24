@@ -17,8 +17,8 @@ import javafx.stage.Stage;
 import voxspell_media_handler.MediaPlayer;
 import voxspell_media_handler.MusicPlayer;
 import voxspell_media_handler.SceneMediator;
-import voxspell_project.FileHandler;
-import voxspell_project.User;
+import voxspell_utility.FileHandler;
+import voxspell_utility.User;
 
 /**
  * This class represents the controller for the Gallery GUI. Its purpose is to enable and disable
@@ -132,6 +132,7 @@ public class galleryController implements Initializable{
 	
 	@FXML
 	public void backAction(){
+		// takes the user back to the main menu
 		Stage stage = (Stage) back.getScene().getWindow();
 		new SceneMediator().changeScene(stage, "/voxspell_main_menu/MainMenuFXML.fxml", "Main Menu");
 	}

@@ -21,8 +21,8 @@ import javafx.concurrent.Task;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import voxspell_project.FileHandler;
-import voxspell_project.User;
+import voxspell_utility.FileHandler;
+import voxspell_utility.User;
 
 /**
  * This class utilises the javaFX thread, and can only operate on it. This class is a singletown
@@ -39,11 +39,11 @@ public class MusicPlayer{
 	private MediaPlayer mediaPlayer;
 	private boolean _playing;
 	private double volume = 0.1;
-	private boolean requireChange;
-	private AudioInputStream audioInputStream;
-	private Clip clip;
 
 	public static MusicPlayer getInstance(){
+		/*
+		 * This method instantiates the singleton, and returns the MediaPlayer object.
+		 */
 		if(_instance == null){
 			_instance = new MusicPlayer();
 		}
@@ -59,53 +59,39 @@ public class MusicPlayer{
 	}
 
 	public void execute(){
-		/*stop();
+		stop();
 		File f = new File(_file);
-		Media hit = new Media(f.toURI().toString());
+		Media hit = new Media(f.toURI().toString()); // generating the url to the media file
 		mediaPlayer = new MediaPlayer(hit);
 		// Credit to http://stackoverflow.com/questions/23498376/ahow-to-make-a-mp3-repeat-in-javafx
 		// for the following looping music code for javaFX.
 		mediaPlayer.setOnEndOfMedia(new Runnable() {
-		       public void run() {
-		         mediaPlayer.seek(Duration.ZERO);
-		       }
-		   });
-		  mediaPlayer.play();
-		mediaPlayer.setVolume(getVolume());
-		_playing = true;*/
-	    try {
-	    	stop();
-	        audioInputStream = AudioSystem.getAudioInputStream(new File(_file).getAbsoluteFile());
-	        clip = AudioSystem.getClip();
-	        clip.open(audioInputStream);
-	        FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-	        volume.setValue(-30.0f);
-	        clip.start();
-	        // credit to http://stackoverflow.com/questions/11919009/using-javax-sound-sampled-clip-to-play-loop-and-stop-mutiple-sounds-in-a-game
-	        // for the following loop code.
-	        clip.loop(clip.LOOP_CONTINUOUSLY);
-	    } catch(Exception ex) {
-	        ex.printStackTrace();
-	    }
-
+			public void run() {
+				mediaPlayer.seek(Duration.ZERO); // this method loops the mediaPlayer once the duration is 0
+			}
+		});
+		mediaPlayer.play();
+		mediaPlayer.setVolume(getVolume()); // sets the volume of the media player (in decimal units)
+		_playing = true;
 	}
 
 	public void stop(){
+		/*
+		 * This method stops the media player from playing music - if the music file is different, it stops
+		 * the song completely, else if there has been no change, it merely pauses the media player.
+		 */
 		if(_playing && !_file.equals(new FileHandler().getSetting("currentBGM:", User.getInstance().getUserSettings()))){
-			clip.stop();
-			//mediaPlayer.stop();
+			mediaPlayer.stop();
 			_playing = false;
-		}  /*else if (mediaPlayer != null){
-			//mediaPlayer.pause();
-		}*/ else if (clip != null){
-			clip.stop();
+		}  else if (mediaPlayer != null){
+			mediaPlayer.pause();
 		}
 	}
 
 	public double getVolume() {
 		return volume;
 	}
-	
+
 
 	public void setVolume(double volume) {
 		this.volume = volume;

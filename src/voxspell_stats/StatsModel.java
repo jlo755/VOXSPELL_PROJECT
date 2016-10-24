@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import voxspell_project.FileHandler;
-import voxspell_project.User;
+import voxspell_utility.FileHandler;
+import voxspell_utility.User;
 
 /**
  * This class is the model associated with a Stats GUI. It handles operations such as
@@ -102,9 +102,6 @@ public class StatsModel {
 		String fileName = User.getInstance().getUser()+".stats/"+list;
 		String success = new FileHandler().getSetting(level.replaceAll("\\s+", "")+"Success:", fileName);
 		String failure = new FileHandler().getSetting(level.replaceAll("\\s+", "")+"Failure:", fileName);
-		//System.out.println(success);
-		//System.out.println(fileName);
-		//System.out.println(level.replaceAll("\\s+", "")+"Success:");
 		if(success != null && failure != null){
 			pieChartData.add(new PieChart.Data("Success", Integer.parseInt(success)));
 			pieChartData.add(new PieChart.Data("Failure", Integer.parseInt(failure)));

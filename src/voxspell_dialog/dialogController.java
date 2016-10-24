@@ -33,6 +33,7 @@ public class dialogController {
 	}
 	
 	public void setLabel(String text){
+		// Setting the label text of the desired message associated with this popup.
 		output.setText(text);
 	}
 }

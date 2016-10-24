@@ -12,7 +12,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import voxspell_project.FileHandler;
+import voxspell_utility.FileHandler;
 
 public class createUserController implements Initializable {
 	@FXML Button confirm;
@@ -101,6 +101,7 @@ public class createUserController implements Initializable {
 	}
 
 	private String calculateHash(){
+		// This converts the password into a hash code to associate with the user.
 		String hash = "";
 		int count = 0;
 		for(char e: pwField.getText().toCharArray()){

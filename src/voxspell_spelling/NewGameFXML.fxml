@@ -31,7 +31,7 @@
             <Button fx:id="start" layoutX="337.0" layoutY="182.0" mnemonicParsing="false" onAction="#startAction" text="Start" />
             <Button fx:id="restart" layoutX="244.0" layoutY="239.0" mnemonicParsing="false" onAction="#restartAction" text="Restart" />
             <Button fx:id="shop" layoutX="415.0" layoutY="239.0" mnemonicParsing="false" onAction="#shopAction" prefHeight="26.0" prefWidth="66.0" text="Shop" />
-            <ImageView id="relistenButton" fx:id="relisten" onMousePressed="#relistenAction" fitHeight="51.0" fitWidth="66.0" layoutX="429.0" layoutY="170.0" opacity="0.74" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="relistenButton" fx:id="relisten" fitHeight="51.0" fitWidth="66.0" layoutX="429.0" layoutY="168.0" onMousePressed="#relistenAction" opacity="0.74" pickOnBounds="true" preserveRatio="true" />
       </children>
     </AnchorPane>
   </children>

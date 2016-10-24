@@ -26,11 +26,13 @@ public class CompleteLevelDialogController implements Initializable{
 	}
 	
 	public void setCongratLabel(String text){
+		// This sets the congratulation label with the text from a new game.
 		congratLabel.setText(text);
 	}
 
 	@FXML
 	public void confirmAction(){
+		// this action will close the current window.
 		Stage stage = (Stage) confirm.getScene().getWindow();
 	    stage.close();
 	}

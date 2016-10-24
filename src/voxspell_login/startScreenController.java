@@ -28,12 +28,12 @@ public class startScreenController implements Initializable {
 	@FXML
 	public void loginAction(){
 	    Stage stage = (Stage) login.getScene().getWindow();
-        //new SceneMediator().showScene((Stage)newGame.getScene().getWindow(), "newGame");
 	    Parent root;
 	    try {
 			root = FXMLLoader.load(getClass().getResource("/voxspell_login/loginScreenFXML.fxml"));
 	        stage.setTitle("Login");
 	        Scene scene = new Scene(root);
+	        scene.getStylesheets().add(getClass().getResource("/styling_sheet/StartMenu.css").toExternalForm());
 	        stage.setScene(scene);
 	        stage.show();
 		} catch (IOException e) {

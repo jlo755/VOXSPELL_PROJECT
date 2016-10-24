@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voxspell_help.helpController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="375.0" VBox.vgrow="ALWAYS">
+         <children>
+            <RadioButton fx:id="newGame" layoutX="32.0" layoutY="85.0" mnemonicParsing="false" onAction="#newGameAction" text="New Game" />
+            <RadioButton fx:id="visitShop" layoutX="141.0" layoutY="86.0" mnemonicParsing="false" onAction="#visitShopAction" text="Visit Shop" />
+            <RadioButton fx:id="gallery" layoutX="241.0" layoutY="85.0" mnemonicParsing="false" onAction="#galleryAction" text="Gallery" />
+            <ScrollPane layoutX="32.0" layoutY="117.0">
+               <content>
+                  <TextArea fx:id="textField" prefHeight="257.0" prefWidth="367.0" text="Please select a button for additional information..." />
+               </content>
+            </ScrollPane>
+            <Label layoutX="120.0" layoutY="25.0" text="Information">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="credits" layoutX="327.0" layoutY="86.0" mnemonicParsing="false" onAction="#creditsAction" text="Credits" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>
